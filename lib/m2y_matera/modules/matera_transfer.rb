@@ -43,7 +43,7 @@ module M2yMatera
                 transferResponse.id = transferResponse.data["transactionId"]
                 transferResponse.statusCode = 200
                 transferResponse.transactionCode = transferResponse.data["transactionId"]
-                transferResponse.content = transferResponse
+                # transferResponse.content = transferResponse
             end
             transferResponse
 		end

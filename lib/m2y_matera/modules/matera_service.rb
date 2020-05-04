@@ -43,7 +43,7 @@ module M2yMatera
                 p2p.idAdjustment = p2p.data["transactionId"]
                 p2p.idAdjustmentDestination = p2p.data["transactionId"]
                 p2p.transactionCode = p2p.data["transactionId"]
-                p2p.content = p2p
+                # p2p.content = p2p
                 p2p.statusCode = 200
             end
             p2p
