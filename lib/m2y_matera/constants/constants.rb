@@ -16,7 +16,7 @@ module M2yMatera
   PAYMENT_PATH = "v1/payments"
 
   STATEMENT = "/statement"
-  WITHDRAW = "/withdraw "
+  WITHDRAW = "/withdraw"
 
 
 end

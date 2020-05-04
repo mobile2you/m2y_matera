@@ -32,7 +32,7 @@ module M2yMatera
             puts matera_body
 
 			id = body[:idOriginAccount]
-			int_amount = (body[:amount].divmod 1)[0].to_s
+			int_amount = (body[:value].divmod 1)[0].to_s
 			matera_hash = [int_amount, id, body[:beneficiary][:bankId], body[:beneficiary][:agency], body[:beneficiary][:account], body[:beneficiary][:accountDigit]].join("")
 
 
