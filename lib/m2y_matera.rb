@@ -1,0 +1,6 @@
+require 'm2y_matera/constants/constants'
+require 'm2y_matera/request/matera_request'
+require 'm2y_matera/helpers/matera_helper'
+require 'm2y_matera/modules/matera_modules'
+require 'm2y_matera/models/matera_models'
+require 'm2y_matera/errorHandler/matera_error_handler'
