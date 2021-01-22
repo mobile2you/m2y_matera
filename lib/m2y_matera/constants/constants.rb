@@ -5,8 +5,8 @@ module M2yMatera
   PRODUCTION = "prd"
 
   #urls
-  URL_HML = "https://varcom-mp-api-01.matera.com/"
-  URL_PRD = "https://incubadora-mp-api-hml.matera.systems/"
+  # URL_HML = "https://varcom-mp-api-01.matera.com/"
+  URL_HML = "https://incubadora-mp-api-hml.matera.systems/"
 
   ### Paths
 
