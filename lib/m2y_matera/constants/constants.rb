@@ -17,6 +17,5 @@ module M2yMatera
 
   STATEMENT = "/statement"
   WITHDRAW = "/withdraw"
-
-
+  VALIDATION_BUREAU = "/validationBureauCallback"
 end
