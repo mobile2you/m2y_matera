@@ -13,7 +13,7 @@ module M2yMatera
 			#fixing cdt_fields
 			if !account.nil? && !account.account.nil?
         if account.financialLimit.present?
-				  account.saldoDisponivelGlobal = account.financialLimit['realBalance'].to_f #/100.0
+				  account.saldoDisponivelGlobal = account.financialLimit['realBalance'].to_f #/100.0,
         end
 				account.idPessoa = account.accountHolderId
 				account.idStatusConta = 0
@@ -43,25 +43,5 @@ module M2yMatera
 		end
 
 
-		def bureau_validation(params)
-			matera_body = {
-				metadata: {
-				  validationTimestamp: params[:timestamp],
-				  sourceSystem: params[:source_system],
-				  transactionId: params[:transaction_id],
-				  validationProtocol: params[:validation_protocol],
-				  validationSystem: 'IDWALL'
-				},
-				results: {
-					status: 'APPROVED',
-					remarks: [
-						'Additional information'
-					]
-				}
-			}
-			
-			response = @request.post(@url + ACCOUNT_PATH + VALIDATION_BUREAU, matera_body, [body[:idConta], int_amount].join(""))
-			MateraModel.new(response['data'])
-		end
 	end
 end
