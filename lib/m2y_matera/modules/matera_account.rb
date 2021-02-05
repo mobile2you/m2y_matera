@@ -42,6 +42,26 @@ module M2yMatera
 			transactions
 		end
 
+    def bureau_validation(params)
+			matera_body = {
+				metadata: {
+				  validationTimestamp: params[:timestamp],
+				  sourceSystem: params[:source_system],
+				  transactionId: params[:transaction_id],
+				  validationProtocol: params[:validation_protocol],
+				  validationSystem: 'IDWALL'
+				},
+				results: {
+					status: 'APPROVED',
+					remarks: [
+						'Additional information'
+					]
+				}
+			}
+			
+			response = @request.post(@url + ACCOUNT_PATH + VALIDATION_BUREAU, matera_body, [body[:idConta], int_amount].join(""))
+			MateraModel.new(response['data'])
+		end
 
 	end
 end
