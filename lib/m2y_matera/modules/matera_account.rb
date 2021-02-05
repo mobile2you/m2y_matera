@@ -12,7 +12,9 @@ module M2yMatera
 			
 			#fixing cdt_fields
 			if !account.nil? && !account.account.nil?
-				account.saldoDisponivelGlobal = account.financialLimit['realBalance'].to_f #/100.0
+        if account.financialLimit.present?
+				  account.saldoDisponivelGlobal = account.financialLimit['realBalance'].to_f #/100.0
+        end
 				account.idPessoa = account.accountHolderId
 				account.idStatusConta = 0
 				account.id = account.account["accountId"]
