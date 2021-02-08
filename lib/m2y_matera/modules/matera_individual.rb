@@ -11,10 +11,10 @@ module M2yMatera
             matera_body = {}
             matera_body[:externalIdentifier] = rand(1..9999)
             matera_body[:sharedAccount] = false
-            matera_body[:document] = body[:documents] if body[:documents]
             matera_body[:client] = {
                 name: body[:name],
                 email: body[:email],
+                documents: body[:documents],
                 socialName: body[:legalName].nil? ? body[:name] : body[:legalName],
                 taxIdentifier: {
                     country: "BRA",
@@ -29,7 +29,7 @@ module M2yMatera
 
             response = @request.post(@url + ACCOUNT_PATH, matera_body,[matera_body[:externalIdentifier], matera_body[:client][:taxIdentifier][:taxId]].join("") )
             account = MateraModel.new(response)
-            
+
             if account && account.data
                 account.data["registration_id"] = account.data["account"]["accountId"]
                 account.data["id"] = matera_body[:externalIdentifier]
