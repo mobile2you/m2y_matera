@@ -9,10 +9,10 @@ module M2yMatera
       matera_body = {}
       matera_body[:externalIdentifier] = rand(1..9999)
       matera_body[:sharedAccount] = false
-      matera_body[:document] = body[:documents] if body[:documents]
       matera_body[:client] = {
         name: body[:name],
         email: body[:email],
+        documents: body[:documents],
         socialName: body[:legalName] || body[:name],
         taxIdentifier: {
           country: 'BRA',
