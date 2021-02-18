@@ -18,4 +18,6 @@ module M2yMatera
   STATEMENT = "/statement"
   WITHDRAW = "/withdraw"
   VALIDATION_BUREAU = "/validationBureauCallback"
+
+  BILLS_PATH = 'v3/bills'
 end
