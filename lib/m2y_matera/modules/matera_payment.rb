@@ -10,7 +10,8 @@ module M2yMatera
                               MateraHelper.conductorBodyToString(matera_params),
                               matera_params[:document])
 
-      MateraModel.new(response['data'] || response['error'])
+      return response  if response['data'].nil?
+      MateraModel.new(response['data'])
     end
   end
 end
