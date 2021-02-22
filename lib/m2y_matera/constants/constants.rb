@@ -20,4 +20,6 @@ module M2yMatera
   VALIDATION_BUREAU = "/validationBureauCallback"
 
   BILLS_PATH = 'v3/bills'
+
+  PUSH = '/notifications/push'
 end
