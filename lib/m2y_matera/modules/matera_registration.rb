@@ -6,6 +6,7 @@ module M2yMatera
 
     def createRegistration(body, _version = 1)
       # fix cdt_params
+      address = body[:address]
       matera_body = {}
       matera_body[:externalIdentifier] = rand(1..9999)
       matera_body[:sharedAccount] = false
@@ -22,6 +23,24 @@ module M2yMatera
           country: 'BRA',
           phoneNumber: body[:phone][:areaCode] + body[:phone][:number]
         }
+      }
+      matera_body[:additionalDetailsCorporate] = {
+        representatives: [
+          {
+            mother: body[:motherName],
+            birthDate: body[:birthDate],
+            mailAddress: {
+              logradouro: address[:street],
+              numero: address[:number],
+              complemento: address[:complement],
+              bairro: address[:neighborhood],
+              cidade: address[:city],
+              estado: address[:federativeUnit],
+              cep: address[:zipCode],
+              pais: address[:country]
+            }
+          }
+        ]
       }
       puts matera_body
 
