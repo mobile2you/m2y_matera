@@ -21,5 +21,10 @@ module M2yMatera
 
   BILLS_PATH = 'v3/bills'
 
+  COUNTRY_PATH = 'v1/country/'
+  AREA_CODE_PATH = '/area-code/'
+  CARRIERS_PATH = '/carriers'
+  VALUE_PATH = '/values'
+
   PUSH = '/notifications/push'
 end
