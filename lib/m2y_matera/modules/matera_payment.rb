@@ -14,21 +14,11 @@ module M2yMatera
       MateraModel.new(response['data'])
     end
 
-    def payment(matera_body)
-      matera_header_hash = [
-        matera_body[:sender][:account][:branch],
-        matera_body[:sender][:account][:accountId],
-        matera_body[:sender][:client][:taxId],
-        matera_body[:paymentInfo][:transactionType],
-        matera_body[:totalAmount].to_i,
-        matera_body[:sender][:account][:mobilePhone][:phoneNumber],
-        matera_body[:totalAmount].to_i,
-      ].join('')
+    def payment(matera_body, account_id, matera_header_hash)
+      response = @request.post( @url + ACCOUNT_PATH + account_id + 
+                                WITHDRAW, matera_body, matera_header_hash)
 
-      response = @request.post( @url + PAYMENT_PATH,
-                                matera_body, matera_header_hash)
-
-      return response if response['data'].nil?
+      return response if response.nil? || response['data'].nil?
       MateraModel.new(response['data'])
     end
   end
