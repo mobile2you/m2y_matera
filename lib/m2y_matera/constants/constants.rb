@@ -14,6 +14,7 @@ module M2yMatera
   ACCOUNT_PATH = "v1/accounts/"
   DEPOSIT_PATH = "v1/accounts/deposits"
   PAYMENT_PATH = "v1/payments"
+  ACCOUNT = '/account'
 
   STATEMENT = "/statement"
   WITHDRAW = "/withdraw"
