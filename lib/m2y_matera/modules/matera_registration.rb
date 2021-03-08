@@ -4,12 +4,23 @@ module M2yMatera
       startModule(access_key, secret_key, env)
     end
 
-    def createRegistration(body, _version = 1)
+    def createRegistration(body,_version = 1)
       # fix cdt_params
       address = body[:address]
       matera_body = {}
       matera_body[:externalIdentifier] = rand(1..9999)
       matera_body[:sharedAccount] = false
+      matera_body[:clientType] = 'Person'
+      matera_body[:occupation] = 1
+      matera_body[:maritalStatus] = 'SEPARATED'
+      matera_body[:businessLine] = 1
+      matera_body[:gender] = 'M'
+      matera_body[:rg] = {
+        number: "222836933",
+        issueDate: "10-10-2012",
+        issuer: "br",
+        state: "SSP"
+      }
       matera_body[:client] = {
         name: body[:name],
         email: body[:email],
@@ -22,25 +33,55 @@ module M2yMatera
         mobilePhone: {
           country: 'BRA',
           phoneNumber: body[:phone][:areaCode] + body[:phone][:number]
+        },
+        mailAddress: {
+          logradouro: address[:street],
+          numero: address[:number],
+          cidade: address[:city],
+          estado: address[:federativeUnit],
+          cep: address[:zipCode],
+          pais: address[:country],
+          bairro: address[:neighborhood]
         }
       }
-      matera_body[:additionalDetailsCorporate] = {
-        representatives: [
-          {
-            mother: body[:motherName],
-            birthDate: body[:birthDate],
-            mailAddress: {
-              logradouro: address[:street],
-              numero: address[:number],
-              complemento: address[:complement],
-              bairro: address[:neighborhood],
-              cidade: address[:city],
-              estado: address[:federativeUnit],
-              cep: address[:zipCode],
-              pais: address[:country]
-            }
+      matera_body[:billingAddress] = {
+        logradouro: address[:street],
+        numero: address[:number],
+        cidade: address[:city],
+        estado: address[:federativeUnit],
+        cep: address[:zipCode],
+        pais: address[:country],
+        bairro: address[:neighborhood]
+      }
+      matera_body[:AdditionalDetailsPerson] = {
+        mother: body[:motherName],
+        birthDate: body[:birthDate],
+        birthCity: address[:city],
+        birthState: address[:federativeUnit],
+        birthCountry: address[:country],
+        legalResponsible: {
+          name: body[:name],
+          email: body[:email],
+          documents: body[:documents],
+          socialName: body[:legalName] || body[:name],
+          taxIdentifier: {
+            country: 'BRA',
+            taxId: body[:document]
+          },
+          mobilePhone: {
+            country: 'BRA',
+            phoneNumber: body[:phone][:areaCode] + body[:phone][:number]
+          },
+          mailAddress: {
+            logradouro: address[:street],
+            numero: address[:number],
+            cidade: address[:city],
+            estado: address[:federativeUnit],
+            cep: address[:zipCode],
+            pais: address[:country],
+            bairro: address[:neighborhood]
           }
-        ]
+        }
       }
       puts matera_body
 
