@@ -22,12 +22,23 @@ module M2yMatera
 			account
 		end
 
+		def getBalance(id)
+			response = @request.get(@url + ACCOUNT_PATH + id.to_s + BALANCE, id.to_s)
+			balances = MateraModel.new(response["data"]["balances"].first)
+			
+			# fixing cdt_fields
+			if !balances.blank?
+				balances.saldoDisponivelGlobal = balances["amount"].to_f #/100.0,
+				balances.idStatusConta = 0
+			end
+			balances
+		end
+
 
 		def getTransactions(id)
 			response = @request.get(@url + ACCOUNT_PATH + id.to_s + STATEMENT, id.to_s)
-			transactions = MateraModel.new(response["data"]).statement.reject!{ |n| n["type"] == "S" } 
+			transactions = MateraModel.new(response["data"]).statement.reject { |n| n["type"] == "S" }
 
-			# fixing cdt_fields
 			if !transactions.nil?
 				transactions.each do |transaction|
 					transaction["dataOrigem"] = transaction["entryDate"].nil? ? transaction["creditDate"] : transaction["entryDate"]
