@@ -12,9 +12,10 @@ module M2yMatera
       }
     end
 
-
     def get(url, transaction_hash)
-      @headers["Transaction-Hash"] = calculate_hash(transaction_hash)
+      unless transaction_hash.nil?
+        @headers["Transaction-Hash"] = calculate_hash(transaction_hash)
+      end
       puts url.to_s
       req = HTTParty.get(url, headers: @headers)
       req.parsed_response
