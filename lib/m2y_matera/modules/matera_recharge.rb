@@ -17,5 +17,20 @@ module M2yMatera
       model.values = model.data
       model
     end
+
+    def confirmRecharge(account_id, matera_params)
+      matera_body = {
+        mobilePhone: {
+          country: 'BRA',
+          phoneNumber: matera_params[:phoneNumber]
+        },
+        totalAmount: matera_params[:amount],
+        carrierId: matera_params[:dealerCode],
+        externalIdentifier: rand(1..9999)
+      }
+      p matera_body
+      response = @request.post(@url + ACCOUNT_PATH.gsub('s', '') + account_id + RECHARGE, matera_body, [account_id, matera_params[:phoneNumber], matera_params[:amount]].join(''))
+      MateraModel.new(response)
+    end
   end
 end
