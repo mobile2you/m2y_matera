@@ -20,6 +20,7 @@ module M2yMatera
   WITHDRAW = "/withdraw"
   VALIDATION_BUREAU = "/validationBureauCallback"
   BALANCE = "/balance"
+  RECHARGE = '/recharge'
 
   BILLS_PATH = 'v3/bills'
 
