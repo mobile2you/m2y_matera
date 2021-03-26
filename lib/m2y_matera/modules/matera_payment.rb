@@ -15,7 +15,7 @@ module M2yMatera
     
     def payment(account_id, matera_params)
       matera_body = {
-        totalAmount: matera_params[:amount].to_i,
+        totalAmount: matera_params[:amount].to_f,
         mediatorFee: 0,
         currency: 'BRL',
         externalIdentifier: rand(1..9999),
@@ -35,8 +35,8 @@ module M2yMatera
       }
 
       p matera_body
-      
-      response = @request.post(@url + ACCOUNT_PATH + account_id + WITHDRAW, matera_body, [matera_body[:totalAmount], account_id, matera_params[:linhaDigitavel]].join(''))
+
+      response = @request.post(@url + ACCOUNT_PATH + account_id + WITHDRAW, matera_body, [matera_body[:totalAmount].to_i, account_id, matera_params[:linhaDigitavel]].join(''))
       MateraModel.new(response['data'] || response['error'])
     end
   end
