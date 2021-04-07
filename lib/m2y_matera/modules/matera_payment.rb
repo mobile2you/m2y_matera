@@ -18,7 +18,7 @@ module M2yMatera
         totalAmount: matera_params[:amount].to_f,
         mediatorFee: 0,
         currency: 'BRL',
-        externalIdentifier: rand(1..9999),
+        externalIdentifier: Digest::MD5.hexdigest(account_id + Time.now.to_i.to_s),
         withdrawInfo: {
           withdrawType: 'Boleto',
           boleto: {

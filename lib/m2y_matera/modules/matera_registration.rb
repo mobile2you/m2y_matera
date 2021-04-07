@@ -89,7 +89,7 @@ module M2yMatera
       partners = body[:partners][:individuals]
 
       matera_body = {
-        externalIdentifier: rand(1..9999),
+        externalIdentifier: Digest::MD5.hexdigest(body[:document] + Time.now.to_i.to_s),
         sharedAccount: false,
         client: {
           name: body[:name],
@@ -164,7 +164,7 @@ module M2yMatera
       address = body[:address]
 
       matera_body = {
-        externalIdentifier: rand(1..9999),
+        externalIdentifier: Digest::MD5.hexdigest(body[:document] + Time.now.to_i.to_s),
         sharedAccount: false,
         clientType: 'PERSON',
         accountType: 'UNLIMITED_ORDINARY',

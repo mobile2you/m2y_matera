@@ -10,7 +10,7 @@ module M2yMatera
         def p2pTransfer(body)
             #fix cdt_params
             matera_body = {}
-            matera_body[:externalIdentifier] = rand(1..999999)
+            matera_body[:externalIdentifier] = Digest::MD5.hexdigest(body[:originalAccount] + Time.now.to_i.to_s)
             matera_body[:totalAmount] = body[:amount]
             matera_body[:currency] = "BRL"
             matera_body[:paymentInfo] = {
