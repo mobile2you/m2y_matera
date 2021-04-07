@@ -11,7 +11,7 @@ module M2yMatera
 			
             #fix cdt_params
             matera_body = {}
-            matera_body[:externalIdentifier] = rand(1..9999)
+            matera_body[:externalIdentifier] = Digest::MD5.hexdigest(body[:idOriginAccount] + Time.now.to_i.to_s)
             matera_body[:currency] = "BRL"
             matera_body[:totalAmount] = body[:value]
             matera_body[:withdrawInfo] = {

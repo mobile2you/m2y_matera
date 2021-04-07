@@ -26,7 +26,7 @@ module M2yMatera
         },
         totalAmount: matera_params[:amount],
         carrierId: matera_params[:dealerCode],
-        externalIdentifier: rand(1..9999)
+        externalIdentifier: Digest::MD5.hexdigest(account_id + Time.now.to_i.to_s)
       }
       p matera_body
       response = @request.post(@url + ACCOUNT_PATH.gsub('s', '') + account_id + RECHARGE, matera_body, [account_id, matera_params[:phoneNumber], matera_params[:amount]].join(''))

@@ -9,7 +9,7 @@ module M2yMatera
         def generateTicket(body)
             #fix cdt_params
             matera_body = {}
-            matera_body[:externalIdentifier] = rand(1..999999)
+            matera_body[:externalIdentifier] = Digest::MD5.hexdigest(body[:idConta] + Time.now.to_i.to_s)
             matera_body[:paymentInfo] = {
                 transactionType: "Boleto",
                 boleto: {
