@@ -22,6 +22,7 @@ module M2yMatera
   VALIDATION_BUREAU = "/validationBureauCallback"
   BALANCE = "/balance"
   RECHARGE = '/recharge'
+  TRANSACTIONS = '/transactions'
 
   BILLS_PATH = 'v3/bills'
 

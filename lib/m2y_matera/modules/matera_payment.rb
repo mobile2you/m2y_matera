@@ -12,7 +12,7 @@ module M2yMatera
 
       MateraModel.new(response['data'] || response['error'])
     end
-    
+
     def payment(account_id, matera_params)
       matera_body = {
         totalAmount: matera_params[:amount].to_f,
@@ -39,5 +39,26 @@ module M2yMatera
       response = @request.post(@url + ACCOUNT_PATH + account_id + WITHDRAW, matera_body, [matera_body[:totalAmount].to_i, account_id, matera_params[:linhaDigitavel]].join(''))
       MateraModel.new(response['data'] || response['error'])
     end
+
+
+    def getTransactions(id)
+      response = @request.get(@url + ACCOUNT_PATH + id.to_s + STATEMENT, id.to_s)
+      transactions = MateraModel.new(response["data"]).statement.reject { |n| n["type"] == "S" }
+
+      if !transactions.nil?
+        transactions.each do |transaction|
+          transaction["dataOrigem"] = transaction["entryDate"].nil? ? transaction["creditDate"] : transaction["entryDate"]
+          transaction["descricaoAbreviada"] = transaction["description"]
+          transaction["idEventoAjuste"] = transaction["transactionId"]
+          transaction["codigoMCC"] = transaction["transactionId"]
+          transaction["nomeFantasiaEstabelecimento"] = transaction["description"]
+          transaction["valorBRL"] = transaction["amount"].to_f #/100.0
+          transaction["flagCredito"] = transaction["type"] == "C" ? 1 : 0
+        end
+      end
+      transactions
+    end
+
+
   end
 end
