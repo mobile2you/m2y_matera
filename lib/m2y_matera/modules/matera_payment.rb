@@ -42,7 +42,7 @@ module M2yMatera
 
 
     def getTransactions(id)
-      response = @request.get(@url + ACCOUNT_PATH + id.to_s + TRANSACTIONS, id.to_s)
+      response = @request.get(@url + V2_ACCOUNT_PATH + id.to_s + TRANSACTIONS, id.to_s)
       puts response["data"]
       transactions = MateraModel.new(response["data"]).transactions
 

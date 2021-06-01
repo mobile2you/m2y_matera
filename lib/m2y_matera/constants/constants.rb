@@ -13,6 +13,7 @@ module M2yMatera
 
   #account
   ACCOUNT_PATH = "v1/accounts/"
+  V2_ACCOUNT_PATH = "v2/accounts/"
   DEPOSIT_PATH = "v1/accounts/deposits"
   PAYMENT_PATH = "v1/payments"
   RECHARGE_PATH = 'v1/country/BRA/area-code/'
