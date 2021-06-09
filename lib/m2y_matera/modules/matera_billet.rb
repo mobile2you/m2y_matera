@@ -48,7 +48,7 @@ module M2yMatera
 
     def findTransaction(id)
       transaction_hash = id
-      response = @request.get(@url + DEPOSIT_PATH + "#{id.to_s}", transaction_hash)
+      response = @request.get(@url + DEPOSIT_PATH + "/#{id.to_s}", transaction_hash)
       puts response["data"]
       transactions = MateraModel.new(response["data"])
       transactions
