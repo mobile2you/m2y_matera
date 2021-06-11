@@ -18,6 +18,18 @@ module M2yMatera
           dueDate: body[:dataVencimento]
         }
       }
+      if !body[:street].nil?
+        matera_body[:paymentInfo][:billingAddress] = {
+          logradouro: body[:street],
+          numero: body[:number],
+          cidade: body[:city],
+          estado: body[:state],
+          cep: body[:zip].gsub("-", ""),
+          pais: "BRA",
+
+        }
+      end
+
       matera_body[:recipients] = [{
                                     account: {
                                       accountId: body[:idConta]
