@@ -42,11 +42,17 @@ module M2yMatera
 
       id = body[:idOriginAccount]
       int_amount = (body[:value].divmod 1)[0].to_s
-      matera_hash_string = [int_amount, id, body[:beneficiary][:bankId], body[:beneficiary][:agency], matera_body[:withdrawInfo][:accountDestination]].join("")
-      
+      matera_hash_string = int_amount
       puts matera_hash_string
+      matera_hash_string += id.to_s
       puts matera_hash_string
+      matera_hash_string += body[:beneficiary][:bankId].to_s
       puts matera_hash_string
+      matera_hash_string += body[:beneficiary][:agency].to_s
+
+      puts matera_hash_string
+      matera_hash_string += matera_body[:withdrawInfo][:accountDestination].to_s
+
       puts matera_hash_string
 
 
