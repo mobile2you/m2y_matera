@@ -43,6 +43,7 @@ module M2yMatera
       id = body[:idOriginAccount]
       int_amount = (body[:value].divmod 1)[0].to_s
       matera_hash = [int_amount, id, body[:beneficiary][:bankId], body[:beneficiary][:agency], matera_body[:withdrawInfo][:accountDestination]].join("")
+      puts matera_hash
 
 
       response = @request.post(@url + ACCOUNT_PATH + id.to_s + WITHDRAW, matera_body, matera_hash)
