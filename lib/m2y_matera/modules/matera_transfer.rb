@@ -49,10 +49,8 @@ module M2yMatera
       matera_hash_string += body[:beneficiary][:bankId].to_s
       puts matera_hash_string
       matera_hash_string += body[:beneficiary][:agency].to_s
-
       puts matera_hash_string
-      matera_hash_string += matera_body[:withdrawInfo][:accountDestination].to_s
-
+      matera_hash_string += matera_body[:withdrawInfo][:bankTransfer][:accountDestination].to_s
       puts matera_hash_string
 
 
