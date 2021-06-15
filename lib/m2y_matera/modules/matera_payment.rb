@@ -36,12 +36,8 @@ module M2yMatera
         }
       else
         matera_body[:withdrawInfo][:utilities] = {
-          documentNumber: matera_params[:document],
-          barcode: matera_params[:barcode],
           typeableLine: matera_params[:linhaDigitavel],
-          beneficiaryTaxIdentifier: matera_params[:taxIdentifier],
           dueDate: matera_params[:dueDate],
-          paidAmount: matera_params[:amount].to_f
         }
       end
 
