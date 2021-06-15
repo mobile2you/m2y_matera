@@ -20,7 +20,7 @@ module M2yMatera
         currency: 'BRL',
         externalIdentifier: Digest::MD5.hexdigest(account_id + Time.now.to_i.to_s),
         withdrawInfo: {
-          withdrawType: 'Boleto',
+          withdrawType: matera_params[:linhaDigitavel].first == "8" ? 'Utilities' : 'Boleto',
           boleto: {
             interestAmount: matera_params[:interest],
             fineAmount: matera_params[:fine],
