@@ -21,18 +21,29 @@ module M2yMatera
         externalIdentifier: Digest::MD5.hexdigest(account_id + Time.now.to_i.to_s),
         withdrawInfo: {
           withdrawType: matera_params[:linhaDigitavel].first == "8" ? 'Utilities' : 'Boleto',
-          boleto: {
-            interestAmount: matera_params[:interest],
-            fineAmount: matera_params[:fine],
-            documentNumber: matera_params[:document],
-            typeableLine: matera_params[:linhaDigitavel],
-            beneficiaryTaxIdentifier: matera_params[:taxIdentifier],
-            dueDate: matera_params[:dueDate],
-            discount: matera_params[:discount]
-          },
           senderComment: matera_params[:description]
         }
       }
+      if matera_params[:linhaDigitavel].first != "8"
+        matera_body[:withdrawInfo][:boleto] = {
+          interestAmount: matera_params[:interest],
+          fineAmount: matera_params[:fine],
+          documentNumber: matera_params[:document],
+          typeableLine: matera_params[:linhaDigitavel],
+          beneficiaryTaxIdentifier: matera_params[:taxIdentifier],
+          dueDate: matera_params[:dueDate],
+          discount: matera_params[:discount]
+        }
+      else
+        matera_body[:withdrawInfo][:utilities] = {
+          documentNumber: matera_params[:document],
+          barcode: matera_params[:barcode],
+          typeableLine: matera_params[:linhaDigitavel],
+          beneficiaryTaxIdentifier: matera_params[:taxIdentifier],
+          dueDate: matera_params[:dueDate],
+          paidAmount: matera_params[:amount].to_f
+        }
+      end
 
       p matera_body
 
